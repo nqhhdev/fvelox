@@ -1,0 +1,95 @@
+{
+  "@@locale": "en",
+  "appTitle": "fvelox",
+  "brandName": "fvelox",
+  "homeTab": "Home",
+  "paymentsTab": "Payments",
+  "profileName": "Boss",
+  "profileInitials": "BO",
+  "createIncomingPaymentRequest": "Create incoming payment request",
+  "offlineCachedPayments": "Offline — showing cached payments",
+  "retry": "Retry",
+  "loading": "Loading",
+  "greetingMorning": "Good morning",
+  "greetingAfternoon": "Good afternoon",
+  "greetingEvening": "Good evening",
+  "greeting": "{greeting}, {name}.",
+  "@greeting": {
+    "placeholders": {
+      "greeting": {},
+      "name": {}
+    }
+  },
+  "paymentSubtitle": "Your payments, with composure.",
+  "recentActivity": "Recent activity",
+  "seeAll": "See all",
+  "approvedThisMonth": "Approved this month",
+  "paymentCount": "{count, plural, =0 {0 payments} =1 {1 payment} other {{count} payments}}",
+  "@paymentCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "allDecidedPayments": "All decided payments",
+  "noDecidedPayments": "No decided payments yet.",
+  "approved": "Approved",
+  "rejected": "Rejected",
+  "paymentDetails": "Payment details",
+  "backTo": "Back to {destination}",
+  "@backTo": {
+    "placeholders": {
+      "destination": {}
+    }
+  },
+  "date": "Date",
+  "reference": "Reference",
+  "note": "Note",
+  "incomingRequest": "Incoming request",
+  "reviewBeforeDecide": "Review before you decide.",
+  "incomingRequestDetails": "From: ••••••••••\nAmount: AED ••••••\nReference: {reference}",
+  "@incomingRequestDetails": {
+    "placeholders": {
+      "reference": {}
+    }
+  },
+  "reject": "Reject",
+  "approve": "Approve",
+  "cancelRequest": "Cancel",
+  "changeDecision": "Change decision",
+  "confirmAction": "Confirm action",
+  "approvePayment": "Approve payment",
+  "rejectPayment": "Reject payment",
+  "verificationCodePrompt": "Enter the 4-digit verification code to continue.",
+  "otpHint": "••••",
+  "confirm": "Confirm",
+  "unavailableOffline": "Unavailable offline",
+  "unableCreatePaymentRequest": "Unable to create a payment request.",
+  "paymentApprovalUnavailable": "Payment approval is unavailable.",
+  "unableLoadPaymentDetails": "Unable to load payment details.",
+  "genericError": "Something went wrong. Please try again.",
+  "invalidOtp": "That code is not valid. Please try again.",
+  "wrongCodeDemo": "Wrong code. Use 8888 for demo.",
+  "networkError": "A network error occurred.",
+  "localStorageUnavailable": "Local storage is unavailable.",
+  "paymentNotFound": "Payment not found.",
+  "paymentNotDecided": "This payment is still waiting for approval.",
+  "paymentAlreadyDecided": "This payment was already decided.",
+  "invalidPaymentRequest": "Invalid payment request.",
+  "invalidServerResponse": "The server returned an invalid response.",
+  "offlineCreateRequest": "You are offline. Creating a payment request requires a connection.",
+  "offlineDecision": "You are offline. Approving or rejecting requires a connection.",
+  "offlineDeletePayment": "You are offline. Deleting a payment requires a connection.",
+  "paymentApprovedSuccess": "Payment approved successfully.",
+  "paymentRejectedSuccess": "Payment rejected successfully.",
+  "paymentDeletedSuccess": "Payment removed.",
+  "unableDeletePayment": "Unable to remove this payment.",
+  "deletePayment": "Delete payment",
+  "amountAed": "AED {amount}",
+  "@amountAed": {
+    "placeholders": {
+      "amount": {}
+    }
+  }
+}
