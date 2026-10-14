@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:fvelox/core/design_system/fvelox_toast_controller.dart';
 import 'package:fvelox/core/errors/app_failure.dart';
 import 'package:fvelox/features/payment_approval/domain/entities/payment.dart';
 import 'package:fvelox/features/payment_approval/domain/entities/payment_feature.dart';
@@ -30,6 +31,7 @@ void main() {
       getDecidedPayments: GetDecidedPaymentsInteractor(repository),
       deletePayment: DeletePaymentInteractor(repository),
       requestScreenRefresh: () => refreshCount++,
+      toast: FveloxToastController(),
     );
     addTearDown(controller.dispose);
 
@@ -59,6 +61,7 @@ void main() {
       deletePayment: DeletePaymentInteractor(repository),
       deletePayments: DeletePaymentsInteractor(repository),
       requestScreenRefresh: () => refreshCount++,
+      toast: FveloxToastController(),
     );
     addTearDown(controller.dispose);
 

@@ -11,6 +11,7 @@ final class HomeScreenState {
     this.hasStartedLoading = false,
     this.isDeleting = false,
     this.failure,
+    required this.dateTime,
   });
 
   final PaymentSummary? summary;
@@ -24,6 +25,7 @@ final class HomeScreenState {
   final bool hasStartedLoading;
   final bool isDeleting;
   final AppFailure? failure;
+  final DateTime dateTime;
 
   HomeScreenState copyWith({
     PaymentSummary? summary,
@@ -34,6 +36,7 @@ final class HomeScreenState {
     bool? isDeleting,
     AppFailure? failure,
     bool clearFailure = false,
+    DateTime? dateTime,
   }) => HomeScreenState(
     summary: summary ?? this.summary,
     recentPayments: recentPayments ?? this.recentPayments,
@@ -42,5 +45,6 @@ final class HomeScreenState {
     hasStartedLoading: hasStartedLoading ?? this.hasStartedLoading,
     isDeleting: isDeleting ?? this.isDeleting,
     failure: clearFailure ? null : failure ?? this.failure,
+    dateTime: dateTime == null ? DateTime.now() : this.dateTime,
   );
 }

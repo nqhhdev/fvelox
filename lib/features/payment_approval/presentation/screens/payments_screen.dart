@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:fvelox/app/providers/app_providers.dart';
 import 'package:fvelox/core/design_system/fvelox_design_system.dart';
-import 'package:fvelox/core/errors/app_failure.dart';
 import 'package:fvelox/core/errors/app_failure_localization.dart';
 import 'package:fvelox/features/payment_approval/domain/entities/payment.dart';
 import 'package:fvelox/features/payment_approval/presentation/providers/payment_providers.dart';
@@ -32,23 +31,7 @@ class PaymentsScreen extends ConsumerWidget {
     );
     final isOffline =
         ref.watch(connectivityStatusProvider).valueOrNull == false;
-    Future<bool> deletePayment(Payment payment) async {
-      try {
-        await ref
-            .read(paymentsControllerProvider.notifier)
-            .deletePayment(payment.id);
-        ref
-            .read(fveloxToastControllerProvider)
-            .showSuccess(l10n.paymentDeletedSuccess);
-        return true;
-      } on AppFailure catch (error) {
-        if (error.code == 'delete_in_progress') return false;
-        ref
-            .read(fveloxToastControllerProvider)
-            .showError(error.toLocalizedMessage(l10n));
-        return false;
-      }
-    }
+    final controller = ref.read(paymentsControllerProvider.notifier);
 
     if (isLoading) {
       return PaymentsLoadingSkeleton(hasExistingPayments: payments.isNotEmpty);
@@ -107,7 +90,8 @@ class PaymentsScreen extends ConsumerWidget {
                       return PaymentRow(
                         payment: payment,
                         onTap: () => onPaymentTap(payment),
-                        onDelete: deletePayment,
+                        onDelete: (payment) =>
+                            controller.deletePaymentWithFeedback(payment, l10n),
                       );
                     },
                   ),

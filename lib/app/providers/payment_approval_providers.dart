@@ -138,6 +138,7 @@ final homeControllerProvider =
         requestScreenRefresh: () => ref
             .read(paymentScreenRefreshControllerProvider.notifier)
             .requestRefresh(),
+        toast: ref.read(fveloxToastControllerProvider),
       );
       ref.listen<int>(paymentScreenRefreshControllerProvider, (previous, next) {
         controller.load();
@@ -155,6 +156,7 @@ final paymentsControllerProvider =
         requestScreenRefresh: () => ref
             .read(paymentScreenRefreshControllerProvider.notifier)
             .requestRefresh(),
+        toast: ref.read(fveloxToastControllerProvider),
       );
       ref.listen<int>(paymentScreenRefreshControllerProvider, (previous, next) {
         controller.load();

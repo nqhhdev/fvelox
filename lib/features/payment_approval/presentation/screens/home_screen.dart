@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import 'package:fvelox/core/design_system/fvelox_design_system.dart';
-import 'package:fvelox/core/errors/app_failure.dart';
 import 'package:fvelox/core/errors/app_failure_localization.dart';
 import 'package:fvelox/app/providers/app_providers.dart';
 import 'package:fvelox/features/payment_approval/domain/entities/payment.dart';
@@ -29,13 +28,19 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final design = FveloxDesignSystem.of(context);
     final l10n = context.l10n;
-    final now = DateTime.now();
-    final greeting = switch (now.hour) {
+    final controller = ref.read(homeControllerProvider.notifier);
+    final dateTime = ref.watch(
+      homeControllerProvider.select((state) => state.dateTime),
+    );
+    final greeting = switch (dateTime.hour) {
       < 12 => l10n.greetingMorning,
       < 18 => l10n.greetingAfternoon,
       _ => l10n.greetingEvening,
     };
-    final dateLabel = DateFormat('EEEE, MMMM d', l10n.localeName).format(now);
+    final dateLabel = DateFormat(
+      'EEEE, MMMM d',
+      l10n.localeName,
+    ).format(dateTime);
     final payments = ref.watch(
       homeControllerProvider.select((state) => state.recentPayments),
     );
@@ -50,23 +55,6 @@ class HomeScreen extends ConsumerWidget {
     );
     final isOffline =
         ref.watch(connectivityStatusProvider).valueOrNull == false;
-    Future<bool> deletePayment(Payment payment) async {
-      try {
-        await ref
-            .read(homeControllerProvider.notifier)
-            .deletePayment(payment.id);
-        ref
-            .read(fveloxToastControllerProvider)
-            .showSuccess(l10n.paymentDeletedSuccess);
-        return true;
-      } on AppFailure catch (error) {
-        if (error.code == 'delete_in_progress') return false;
-        ref
-            .read(fveloxToastControllerProvider)
-            .showError(error.toLocalizedMessage(l10n));
-        return false;
-      }
-    }
 
     if (isLoading) {
       return HomeLoadingSkeleton(hasExistingPayments: payments.isNotEmpty);
@@ -154,7 +142,8 @@ class HomeScreen extends ConsumerWidget {
                       return PaymentRow(
                         payment: payment,
                         onTap: () => onPaymentTap(payment),
-                        onDelete: deletePayment,
+                        onDelete: (payment) =>
+                            controller.deletePaymentWithFeedback(payment, l10n),
                       );
                     },
                   ),
